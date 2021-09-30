@@ -6,26 +6,45 @@ from matplotlib.colors import cnames
 
 def list_to_dict(some_list: list) -> dict:
     # TODO: Transformer la liste en dictionnaire, les éléments de la liste deviennent les clés et leur index deviennent les valeurs
+    dictionnaire = dict()
 
-    return {}
+    for e in some_list:
+        dictionnaire[e] = dictionnaire.get(e, some_list.index(e))
+
+    return dictionnaire
 
 
 def color_name_to_hex(colors: list) -> list:
     # TODO: Trouver la valeur hex de chaque couleur dans la liste et créer une liste de tupple où le premier élément est le nom de la couleur et le deuxième est la valeur hex
+    some_list = []
 
-    return []
+    for color in colors:
+        some_list.append((color, cnames[color]))
+
+    return some_list
 
 
 def create_list() -> list:
     # TODO: Créer une liste des 10 000 premiers entiers positif, sauf pour les entiers de 15 à 350
 
-    return []
+
+    return [i for i in range(10000) if i < 15 or i > 350]
 
 
 def compute_mse(model_dict: dict) -> dict:
     # TODO: Calculer l'erreur quadratique moyen pour chaque modèle. Retourner un dictionnaire contenant les MSE.
+    mse_dict = {}
+    for model_name, value in model_dict.items():
+        print(model_name)
+        print(value)
+        error_sum = 0
 
-    return {}
+        for point in value:
+         error_sum += (point[0] - point[1]) ** 2
+
+        mse_dict[model_name] = error_sum/len(value)
+
+    return mse_dict
 
 
 def main() -> None:
